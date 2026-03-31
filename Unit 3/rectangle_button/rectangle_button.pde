@@ -22,22 +22,22 @@ void draw() {
   //pink buttons
   tactile(200, 500, 50);
   fill(pink);
-  circle(200, 500, 100);
+  rect(125, 425, 150, 100);
 
   //lightpink button
   tactile(400, 500, 50);
   fill(lightPink);
-  circle(400, 500, 100);
+  rect(325, 425, 150, 100);
 
   //purple button
   tactile(600, 500, 50);
   fill(purple);
-  circle(600, 500, 100);
+  rect(525, 425, 150, 100);
 
   //Indicator
   stroke(darkBlue);
   fill(selectedColor);
-  square(250, 100, 300);
+  square(250, 75, 300);
 }
 
 
