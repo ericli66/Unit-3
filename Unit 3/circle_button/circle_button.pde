@@ -20,29 +20,29 @@ void draw() {
   background(lightBlue);
 
   //pink buttons
-  tactile(125);
+  tactile(200, 500, 50);
   fill(pink);
-  rect(125, 425, 150, 100);
+  circle(200, 500, 100);
 
   //lightpink button
-  tactile(325);
+  tactile(400, 500, 50);
   fill(lightPink);
-  rect(325, 425, 150, 100);
+  circle(400, 500, 100);
 
   //purple button
-  tactile(525);
+  tactile(600, 500, 50);
   fill(purple);
-  rect(525, 425, 150, 100);
+  circle(600, 500, 100);
 
   //Indicator
   stroke(darkBlue);
   fill(selectedColor);
-  square(250, 75, 300);
+  square(250, 100, 300);
 }
 
 
-void tactile (int x) {
-  if (mouseX > x && mouseX < x+150 && mouseY > 425 && mouseY < 525) {
+void tactile (int x, int y, int r) {
+  if (dist(x, y, mouseX, mouseY) < r) {
     stroke(white);
   } else {
     stroke(darkBlue);
@@ -52,16 +52,16 @@ void tactile (int x) {
 
 void mouseReleased() {
   //pink button
-  if (mouseX > 125 && mouseX < 275 && mouseY > 425 && mouseY < 525) {
+  if (dist(200, 500, mouseX, mouseY) < 50) {
     selectedColor = pink;
   }
 
   //lightpink button
-  if (mouseX > 325 && mouseX < 475 && mouseY > 425 && mouseY < 525) {
+  if (dist(400, 500, mouseX, mouseY) < 50) {
     selectedColor = lightPink;
   }
   //purple button
-  if (mouseX > 525 && mouseX < 675 && mouseY > 425 && mouseY < 525) {
+  if (dist(600, 500, mouseX, mouseY) < 50) {
     selectedColor = purple;
   }
 }
