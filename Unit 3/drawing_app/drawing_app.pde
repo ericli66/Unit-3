@@ -20,16 +20,16 @@ void setup() {
   background(255);
   selectedColor = red;
   sliderX = 250;
-  YT = loadImage("YT.png");
+  //YT = loadImage("YT.png");
 }
 
 void draw() {
-  // 1. Draw Toolbar
+  // Draw Toolbar
   noStroke();
   fill(220);
-  rect(0, 0, width, 150);
+  rect(0, 0, 1600, 150);
 
-  //draw Interface elements
+  //draw Interface
   Interface();
 }
 
@@ -46,17 +46,18 @@ void Interface() {
   circleButton(brown, 140, 120, 20);
 
   //thickness slider
-  slider(200, 50, 25);
+  slider(225, 75, 25);
 
   //Indicator
   stroke(selectedColor);
   strokeWeight(strokeSize);
-  line(375, 20, 375, 85);
+  line(450, 25, 450, 125);
 
-  //stamp
-  stampButton(YT, 500, 100, 100, 100);
+  ////stamp
+  //stampButton(YT, 500, 100, 100, 100);
 }
 
+//circle funtion
 void circleButton(color c, int x, int y, int r) {
   // Tactile
   if (dist(mouseX, mouseY, x, y) < r) {
@@ -73,10 +74,11 @@ void circleButton(color c, int x, int y, int r) {
   circle(x, y, 2*r);
 }
 
+//slider function
 void slider(int x, int y, int d) {
   strokeWeight(5);
   stroke(0);
-  line(x, y, x + 100, y);
+  line(x, y, x + 150, y);
   //tactile
   if (dist(mouseX, mouseY, sliderX, 50) < d/2) {
     stroke(white);
@@ -85,34 +87,37 @@ void slider(int x, int y, int d) {
   }
   fill(0);
   circle(sliderX, y, d);
-  strokeSize = map(sliderX, 200, 300, 1, 20);
+  strokeSize = map(sliderX, 200, 350, 1, 20);
 }
 
+//to move the slider
 void controlSlider() {
-  if (mouseX > 200 && mouseX < 300 && mouseY > 30 && mouseY < 70 ) {
+  if (mouseX > 225 && mouseX < 375 && mouseY > 50 && mouseY < 100 ) {
     sliderX = mouseX;
   }
 }
 
-void stampButton(PImage label, int x, int y, int w, int h) {
-  if (mouseX > x && mouseX < x+w && mouseY > y && mouseY < y+h) {
-    fill(white);
-    if (mousePressed) {
-      stampOn = true;
-      selectedStamp = label;
-    }
-  } else {
-    fill(gray);
-  }
-  stroke(black);
-  rect(x, y, w, h);
-  image(label, x, y, w, h);
-  fill(black);
-}
+////stamp function
+//void stampButton(PImage label, int x, int y, int w, int h) {
+//  if (mouseX > x && mouseX < x+w && mouseY > y && mouseY < y+h) {
+//    fill(white);
+//    if (mousePressed) {
+//      stampOn = true;
+//      selectedStamp = label;
+//    }
+//  } else {
+//    fill(gray);
+//  }
+//  stroke(black);
+//  rect(x, y, w, h);
+//  image(label, x, y, w, h);
+//  fill(black);
+//}
 
 void mouseDragged() {
   controlSlider();
-
+  
+//check if the stamp is one
   if (mouseY > 150) {
     if (stampOn == true) {
       image(selectedStamp, mouseX, mouseY);
@@ -125,5 +130,7 @@ void mouseDragged() {
 
 void mousePressed() {
   controlSlider();
+  
+  //if(
   
 }
