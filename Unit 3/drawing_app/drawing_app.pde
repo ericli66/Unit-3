@@ -11,7 +11,7 @@ color selectedColor;
 float strokeSize, sliderX;
 
 //stamp images
-PImage YT;
+PImage YT, Dragon;
 PImage selectedStamp;
 boolean stampOn = false;
 
@@ -20,7 +20,8 @@ void setup() {
   background(255);
   selectedColor = red;
   sliderX = 250;
-  //YT = loadImage("YT.png");
+  YT = loadImage("YT.png");
+  Dragon = loadImage("dragon.png");
 }
 
 void draw() {
@@ -53,8 +54,9 @@ void Interface() {
   strokeWeight(strokeSize);
   line(450, 25, 450, 125);
 
-  ////stamp
-  //stampButton(YT, 500, 100, 100, 100);
+  //stamp
+  stampButton(YT, 550, 25, 100, 100);
+  stampButton(Dragon, 750, 25, 100, 100);
 }
 
 //circle funtion
@@ -97,30 +99,30 @@ void controlSlider() {
   }
 }
 
-////stamp function
-//void stampButton(PImage label, int x, int y, int w, int h) {
-//  if (mouseX > x && mouseX < x+w && mouseY > y && mouseY < y+h) {
-//    fill(white);
-//    if (mousePressed) {
-//      stampOn = true;
-//      selectedStamp = label;
-//    }
-//  } else {
-//    fill(gray);
-//  }
-//  stroke(black);
-//  rect(x, y, w, h);
-//  image(label, x, y, w, h);
-//  fill(black);
-//}
+//stamp function
+void stampButton(PImage label, int x, int y, int w, int h) {
+  if (mouseX > x && mouseX < x+w && mouseY > y && mouseY < y+h) {
+    fill(white);
+    if (mousePressed) {
+      stampOn = !stampOn;
+      selectedStamp = label;
+    }
+  } else {
+    fill(gray);
+  }
+  stroke(black);
+  rect(x, y, w+15, h+10);
+  image(label, x+10, y+10, w, h);
+  fill(black);
+}
 
 void mouseDragged() {
   controlSlider();
-  
-//check if the stamp is one
+
+  //check if the stamp is one
   if (mouseY > 150) {
     if (stampOn == true) {
-      image(selectedStamp, mouseX, mouseY);
+      image(selectedStamp, mouseX-100, mouseY-100, 200, 200);
     } else {
       stroke(selectedColor);
       line(pmouseX, pmouseY, mouseX, mouseY);
@@ -130,7 +132,5 @@ void mouseDragged() {
 
 void mousePressed() {
   controlSlider();
-  
-  //if(
   
 }
