@@ -11,7 +11,7 @@ color selectedColor;
 float strokeSize, sliderX;
 
 //stamp images
-PImage YT, Dragon;
+PImage YT, Dragon, Ski;
 PImage selectedStamp;
 boolean stampOn = false;
 
@@ -22,6 +22,7 @@ void setup() {
   sliderX = 250;
   YT = loadImage("YT.png");
   Dragon = loadImage("dragon.png");
+  Ski = loadImage("ski.png");
 }
 
 void draw() {
@@ -55,8 +56,14 @@ void Interface() {
   line(450, 25, 450, 125);
 
   //stamp
+  stampButton(Ski, 950, 25, 100, 100);
   stampButton(YT, 550, 25, 100, 100);
   stampButton(Dragon, 750, 25, 100, 100);
+
+  //Clear, Save, Load
+  rectButton("CLEAR", 1150, 45, 120, 60);
+  rectButton("SAVE", 1300, 45, 120, 60);
+  rectButton("LOAD", 1450, 45, 120, 60);
 }
 
 //circle funtion
@@ -66,6 +73,7 @@ void circleButton(color c, int x, int y, int r) {
     stroke(white);
     if (mousePressed) {
       selectedColor = c;
+      stampOn = false;
     }
   } else {
     stroke(black);
@@ -101,29 +109,64 @@ void controlSlider() {
 
 //stamp function
 void stampButton(PImage label, int x, int y, int w, int h) {
-  if (mouseX > x && mouseX < x+w && mouseY > y && mouseY < y+h) {
+  if (mouseX > x && mouseX < x+w+15 && mouseY > y-5 && mouseY < y+h+5) {
     fill(white);
     if (mousePressed) {
-      stampOn = !stampOn;
+      stampOn = true;
       selectedStamp = label;
     }
   } else {
     fill(gray);
   }
   stroke(black);
-  rect(x, y, w+15, h+10);
-  image(label, x+10, y+10, w, h);
+  strokeWeight(3);
+  rect(x, y-5, w+15, h+10);
+  image(label, x+10, y+5, w, h);
+}
+
+//load, save, and clear buttons
+void rectButton(String label, int x, int y, int w, int h) {
+  if (mouseX > x && mouseX < x + w && mouseY > y && mouseY < y + h) {
+    fill(white);
+  } else {
+    fill(gray);
+  }
+  stroke(black);
+  strokeWeight(2);
+  rect(x, y, w, h, 10);
   fill(black);
+  textAlign(CENTER, CENTER);
+  textSize(20);
+  text(label, x + w/2, y + h/2);
+}
+
+void saveImage(File f) {
+  if (f != null) {
+    PImage canvas = get(0, 150, width, height - 150);
+    canvas.save(f.getAbsolutePath());
+  }
+}
+
+void openImage(File f) {
+  if (f != null) {
+    int n = 0;
+    while (n<10) {
+      PImage pic = loadImage(f.getPath());
+      image(pic, 0, 150);
+      n = n+1 ;
+    }
+  }
 }
 
 void mouseDragged() {
   controlSlider();
 
-  //check if the stamp is one
+  //check if the stamp is on
   if (mouseY > 150) {
     if (stampOn == true) {
       image(selectedStamp, mouseX-100, mouseY-100, 200, 200);
     } else {
+      strokeWeight(strokeSize);
       stroke(selectedColor);
       line(pmouseX, pmouseY, mouseX, mouseY);
     }
@@ -132,5 +175,21 @@ void mouseDragged() {
 
 void mousePressed() {
   controlSlider();
-  
+
+  // Check CLEAR button (Updated X: 1150 to 1270)
+  if (mouseX > 1150 && mouseX < 1270 && mouseY > 45 && mouseY < 105) {
+    fill(255);
+    noStroke();
+    rect(0, 150, width, height - 150);
+  }
+
+  // Check SAVE button (Updated X: 1300 to 1420)
+  if (mouseX > 1300 && mouseX < 1420 && mouseY > 45 && mouseY < 105) {
+    selectOutput("Choose a name for your file", "saveImage");
+  }
+
+  // Check LOAD button (Updated X: 1450 to 1570)
+  if (mouseX > 1450 && mouseX < 1570 && mouseY > 45 && mouseY < 105) {
+    selectInput("Pick an image to load", "openImage");
+  }
 }
