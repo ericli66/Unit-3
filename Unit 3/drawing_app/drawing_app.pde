@@ -11,7 +11,7 @@ color selectedColor;
 float strokeSize, sliderX;
 
 //stamp images
-PImage YT, Dragon, Ski;
+PImage YT, Dragon, Atomic;
 PImage selectedStamp;
 boolean stampOn = false;
 
@@ -22,7 +22,7 @@ void setup() {
   sliderX = 250;
   YT = loadImage("YT.png");
   Dragon = loadImage("dragon.png");
-  Ski = loadImage("ski.png");
+  Atomic = loadImage("atomic.png");
 }
 
 void draw() {
@@ -56,7 +56,7 @@ void Interface() {
   line(450, 25, 450, 125);
 
   //stamp
-  stampButton(Ski, 950, 25, 100, 100);
+  stampButton(Atomic, 950, 25, 100, 100);
   stampButton(YT, 550, 25, 100, 100);
   stampButton(Dragon, 750, 25, 100, 100);
 
