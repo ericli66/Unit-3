@@ -120,7 +120,7 @@ void stampButton(PImage label, int x, int y, int w, int h) {
   }
   stroke(black);
   strokeWeight(3);
-  rect(x, y-5, w+15, h+10);
+  rect(x, y-5, w+15, h+10, 10);
   image(label, x+10, y+5, w, h);
 }
 
