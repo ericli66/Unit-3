@@ -176,19 +176,19 @@ void mouseDragged() {
 void mousePressed() {
   controlSlider();
 
-  // Check CLEAR button (Updated X: 1150 to 1270)
+  // Check CLEAR button 
   if (mouseX > 1150 && mouseX < 1270 && mouseY > 45 && mouseY < 105) {
     fill(255);
     noStroke();
     rect(0, 150, width, height - 150);
   }
 
-  // Check SAVE button (Updated X: 1300 to 1420)
+  // Check SAVE button 
   if (mouseX > 1300 && mouseX < 1420 && mouseY > 45 && mouseY < 105) {
     selectOutput("Choose a name for your file", "saveImage");
   }
 
-  // Check LOAD button (Updated X: 1450 to 1570)
+  // Check LOAD button
   if (mouseX > 1450 && mouseX < 1570 && mouseY > 45 && mouseY < 105) {
     selectInput("Pick an image to load", "openImage");
   }
